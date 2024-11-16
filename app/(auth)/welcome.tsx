@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const index = () => {
+const welcome = () => {
   return (
     <View>
-      <Text>index</Text>
+      <Text>welcome</Text>
     </View>
   );
 };
 
-export default index;
+export default welcome;
 
 const styles = StyleSheet.create({});
