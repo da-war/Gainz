@@ -1,12 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
+import OnBoaringScreen from "@/screens/auth/OnBoardingScreen";
+
 const welcome = () => {
-  return (
-    <View>
-      <Text>welcome</Text>
-    </View>
-  );
+  return <OnBoaringScreen />;
 };
 
 export default welcome;

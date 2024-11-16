@@ -1,5 +1,9 @@
 {
-  "welcome": "ברוך הבא",
-  "select_language": "בחר שפה",
-  "app_description": "זו אפליקציה רב לשונית"
+  "welcomeTitle1": "ברוכים הבאים לגיינז!",
+  "welcomeDescription1": "אתם רק כמה קליקים מעולם תוספי הכושר.",
+  "welcomeTitle2": "גלה תוספים",
+  "welcomeDescription2": "מצא מגוון רחב של תוספים איכותיים.",
+  "welcomeTitle3": "משלוח מהיר ובטוח",
+  "welcomeDescription3": "אנחנו מבטיחים משלוח מהיר ואמין לצרכים הכושר שלך.",
+  "continue": "המשך"
 }

@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { COLORS, FONTS, SIZES } from "@/constants/theme";
+import { router } from "expo-router";
 
 const index = () => {
   return (
     <View style={styles.mainContainer}>
-      <Text style={styles.title}>index</Text>
+      <Text onPress={() => router.push("/(auth)/welcome")} style={styles.title}>
+        index
+      </Text>
     </View>
   );
 };
