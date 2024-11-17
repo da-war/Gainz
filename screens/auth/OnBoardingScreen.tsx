@@ -1,4 +1,4 @@
-import { Image, Text, View, StyleSheet } from "react-native";
+import { Image, Text, View, StyleSheet, I18nManager } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import Swiper from "react-native-swiper";
@@ -35,6 +35,9 @@ const Welcome = () => {
       swiperRef.current?.scrollBy(1);
     }
   };
+
+  console.log("rtl", I18nManager.isRTL);
+  const isRTL = I18nManager.isRTL;
 
   const isLastSlide = activeIndex === slides.length - 1;
 
