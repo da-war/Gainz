@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Stack } from "expo-router";
+import { Slot, Stack } from "expo-router";
 
 import { useFonts } from "expo-font";
 
-const _layout = () => {
+const RootLayout = () => {
   const [loaded] = useFonts({
     "OSC-Bold": require("../assets/fonts/OpenSans_Condensed-Bold.ttf"),
     "OSC-Light": require("../assets/fonts/OpenSans_Condensed-Light.ttf"),
@@ -25,8 +25,9 @@ const _layout = () => {
       <Stack.Screen name="index" />
       <Stack.Screen name="(auth)" />
       <Stack.Screen name="(tabs)" />
+      <Slot />
     </Stack>
   );
 };
 
-export default _layout;
+export default RootLayout;

@@ -1,14 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { Tabs } from "expo-router";
 
-const _layout = () => {
+const AppTabLayout = () => {
   return (
-    <View>
-      <Text>_layout</Text>
-    </View>
+    <Tabs screenOptions={{ headerShown: false }}>
+      <Tabs.Screen name="home" />
+      <Tabs.Screen name="profile" />
+    </Tabs>
   );
 };
 
-export default _layout;
+export default AppTabLayout;
 
 const styles = StyleSheet.create({});

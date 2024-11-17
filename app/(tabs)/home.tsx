@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import Login from "@/screens/auth/Login";
 
-const login = () => {
-  return <Login />;
+const home = () => {
+  return (
+    <View>
+      <Text>home</Text>
+    </View>
+  );
 };
 
-export default login;
+export default home;
 
 const styles = StyleSheet.create({});

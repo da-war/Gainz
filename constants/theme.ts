@@ -1,8 +1,12 @@
+import { Dimensions } from "react-native";
+
 export const COLORS = {
     primary: "#111821",
     secondary: "#118B8D",
     third: "#F26B3B",
-    fourth:"#F26664",
+    fourth: "#F26664",
+    white: "#FFFFFF",
+    gray:"rgba(16, 24, 33, 0.25)"
 }
 
 export const SIZES = {
@@ -45,3 +49,7 @@ export const FONTS = {
     lightItalic: "OSC-LightItalic",
     semiBoldItalic: "OSC-SemiBoldItalic",
 }
+
+export const { width,height } = Dimensions.get("window");
+export const logoWidth = width * 0.5;
+export const viewWidth = width * 0.75;
