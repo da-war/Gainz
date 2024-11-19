@@ -5,17 +5,19 @@ interface ProductListingProps {
   discount?: number;
   price: number;
   title: string;
+  image: string;
   rating?: number;
   totalFeedbacks?: number;
   afterDiscount?: number;
-  onPress: () => {};
-  onPressAddToCart: () => {};
+  onPress: () => void;
+  onPressAddToCart: () => void;
 }
 
 const ProductListing: React.FC<ProductListingProps> = ({
   discount,
   price,
   title,
+  image,
   rating,
   totalFeedbacks,
   afterDiscount,
@@ -24,7 +26,7 @@ const ProductListing: React.FC<ProductListingProps> = ({
   return (
     <Pressable style={styles.mainContainer} onPress={onPress}>
       <View>
-        <Image source={} />
+        <Image source={image} />
       </View>
     </Pressable>
   );

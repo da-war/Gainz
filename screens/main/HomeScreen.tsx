@@ -88,6 +88,9 @@ const HomeScreen = () => {
               onPress={() => console.log(product)}
               price={product.price}
               discount={product.discount}
+              image={product.image}
+              onPressAddToCart={() => console.log("")}
+              title={product.title}
             />
           ))}
         </View>
