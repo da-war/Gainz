@@ -5,23 +5,24 @@ import Swiper from "react-native-swiper";
 import { useRef, useState } from "react";
 import AppButton from "@/components/global/AppButton";
 import { COLORS, FONTS, logoWidth, viewWidth } from "@/constants/theme";
+import { IMAGES } from "@/constants";
 
 const slides = [
   {
-    title: "Welcome to React Native",
-    description: "This is a React Native app",
-    image: require("../../assets/images/onb1.png"),
+    title: "ברוכים הבאים לגיינז!",
+    description: "את/ה במרחק של כמה קליקים מכניסה לעולם תוספי התזונה לחדר כושר",
+    image: IMAGES.onb1,
   },
   {
-    title: "Learn Mobile Development",
-    description: "React Native lets you build mobile apps using JavaScript.",
-    image: require("../../assets/images/onb1.png"),
+    title: "עיין במגוון רחב של תוספי מזון",
+    description: "חקור מבחר מגוון של תוספי חדר כושר באיכות גבוהה עם גיינז",
+    image: IMAGES.onb2,
   },
   {
-    title: "Start Building Amazing Apps",
+    title: "משלוח מהיר ואמין",
     description:
-      "React Native is powerful and scalable for all your app needs.",
-    image: require("../../assets/images/onb1.png"),
+      "תיהנו ממשלוח מהיר ואמין עם גיינז. השירות המסור שלנו מבטיח שתוספי התזונה שלך יגיעו במהירות לדלתך",
+    image: IMAGES.onb3,
   },
 ];
 
@@ -37,27 +38,22 @@ const Welcome = () => {
   };
 
   console.log("rtl", I18nManager.isRTL);
-  const isRTL = I18nManager.isRTL;
 
   const isLastSlide = activeIndex === slides.length - 1;
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.cContainer]}>
-        <Image
-          resizeMode="contain"
-          source={require("../../assets/images/logo.png")}
-          style={styles.logo}
-        />
+        <Image resizeMode="contain" source={IMAGES.logo} style={styles.logo} />
       </View>
 
       <Swiper
         ref={swiperRef}
-        index={activeIndex}
         loop={false}
         dot={<View style={styles.dot} />}
         activeDot={<View style={styles.activeDot} />}
-        onIndexChanged={(index) => setActiveIndex(index)}
+        onIndexChanged={(index) => setActiveIndex(index)} // Sync activeIndex
+        scrollEnabled={false} // Manual scrolling only
       >
         {slides.map((item, index) => (
           <View style={[styles.cContainer, styles.slide]} key={index}>

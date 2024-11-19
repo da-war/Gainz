@@ -1,12 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import HomeScreen from "@/screens/main/HomeScreen";
 
 const home = () => {
-  return (
-    <View>
-      <Text>home</Text>
-    </View>
-  );
+  return <HomeScreen />;
 };
 
 export default home;

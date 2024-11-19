@@ -6,7 +6,8 @@ export const COLORS = {
     third: "#F26B3B",
     fourth: "#F26664",
     white: "#FFFFFF",
-    gray:"rgba(16, 24, 33, 0.25)"
+    gray: "rgba(16, 24, 33, 0.25)",
+    grayBg:"#E7E8E9"
 }
 
 export const SIZES = {
