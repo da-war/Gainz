@@ -11,19 +11,9 @@ const DiagonalBox: React.FC<DiagonalBoxProps> = ({
   return (
     <View style={[styles.container, { height, width }, style]}>
       {/* Top Left Triangle */}
-      <View
-        style={[
-          styles.triangleOne,
-          { borderRightWidth: width, borderTopWidth: height },
-        ]}
-      />
+      <View style={[styles.triangleOne]} />
       {/* Bottom Right Triangle */}
-      <View
-        style={[
-          styles.triangleTwo,
-          { borderLeftWidth: height, borderBottomWidth: width },
-        ]}
-      />
+      <View style={[styles.triangleTwo]} />
       {/* Centered Text */}
       <View style={styles.textContainer}>
         <Text style={styles.text}>{text}</Text>
@@ -61,7 +51,8 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "transparent",
     borderStyle: "solid",
-
+    borderRightWidth: 100,
+    borderTopWidth: 100,
     borderRightColor: "transparent",
     borderTopColor: COLORS.primary,
   },
@@ -69,7 +60,8 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "transparent",
     borderStyle: "solid",
-
+    borderLeftWidth: 100,
+    borderBottomWidth: 100,
     borderLeftColor: "transparent",
     borderBottomColor: COLORS.secondary,
   },

@@ -4,13 +4,13 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { categories, ICONS } from "@/constants";
-import { COLORS } from "@/constants/theme";
-import DiagonalBox from "@/components/global/DiagonlBox";
+import { COLORS, FONTS } from "@/constants/theme";
 
 const SearchScreen = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -29,12 +29,32 @@ const SearchScreen = () => {
           style={styles.input}
         />
       </View>
-      <View>
+      <View style={styles.categoriesContainer}>
         <FlatList
           data={categories}
+          numColumns={2} // Two columns
           keyExtractor={(item) => item.id.toString()}
+          columnWrapperStyle={styles.columnWrapper} // Adds space between columns
           renderItem={({ item }) => (
-            <DiagonalBox height={50} width={185} text={item.title} />
+            <TouchableOpacity
+              onPress={() =>
+                console.log({
+                  id: item.id,
+                  name: item.title,
+                })
+              }
+              style={styles.itemContainer}
+            >
+              <Image
+                style={styles.itemImage}
+                source={require("@/assets/images/mask.png")}
+                resizeMode="cover"
+              />
+
+              <View style={styles.titleContainer}>
+                <Text style={styles.title}>{item.title}</Text>
+              </View>
+            </TouchableOpacity>
           )}
         />
       </View>
@@ -47,6 +67,7 @@ export default SearchScreen;
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
+    overflow: "hidden",
   },
   containerOne: {
     flexDirection: "row",
@@ -64,5 +85,38 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     textAlign: "right",
+  },
+  categoriesContainer: {
+    flex: 1,
+    paddingTop: 10,
+    marginHorizontal: 20,
+  },
+  columnWrapper: {
+    justifyContent: "space-between",
+    marginBottom: 0,
+  },
+  itemContainer: {
+    width: "48%",
+    marginBottom: 10,
+  },
+  itemImage: {
+    width: "100%",
+    height: 50,
+    borderRadius: "5%",
+  },
+  titleContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    top: 0,
+    zIndex: 9,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    color: COLORS.white,
+    fontSize: 16,
+    fontFamily: FONTS.bold,
   },
 });

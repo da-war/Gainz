@@ -9,10 +9,18 @@ import {
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { COLORS, FONTS, SIZES } from "@/constants/theme";
-import { categories, ICONS, IMAGES, productsDiscounted } from "@/constants";
+import {
+  categories,
+  ICONS,
+  IMAGES,
+  products,
+  productsDiscounted,
+} from "@/constants";
 import DiagonalSplitView from "@/components/global/DiagonlBox";
 import DiagonalBox from "@/components/global/DiagonlBox";
 import ProductListing from "@/components/global/ProductListing";
+import FeedbackComponent from "@/components/global/FeedbackComponent";
+import DropDownDetails from "@/components/global/DropDownDetails";
 
 const HomeScreen = () => {
   const userImage = IMAGES.userImage;
@@ -82,17 +90,86 @@ const HomeScreen = () => {
         </View>
 
         <View style={styles.discounted}>
-          <Text style={styles.sectionTitle}>מבצעים והצעות מיוחדות</Text>
-          {productsDiscounted.map((product, index) => (
-            <ProductListing
-              onPress={() => console.log(product)}
-              price={product.price}
-              discount={product.discount}
-              image={product.image}
-              onPressAddToCart={() => console.log("")}
-              title={product.title}
-            />
-          ))}
+          <Text style={[styles.sectionTitle, { marginBottom: 7 }]}>
+            מבצעים והצעות מיוחדות
+          </Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {productsDiscounted.map((product, index) => (
+              <ProductListing
+                key={index}
+                onPress={() => console.log(product)}
+                price={product.price}
+                discount={product.discount}
+                image={product.image}
+                onPressAddToCart={() => console.log("")}
+                title={product.title}
+                rating={product.rating}
+                totalFeedbacks={product.feedbacks.length}
+              />
+            ))}
+          </ScrollView>
+        </View>
+        <View style={styles.discounted}>
+          <Text style={[styles.sectionTitle, { marginBottom: 7 }]}>
+            מוצרים ממולצים
+          </Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {productsDiscounted.map((product, index) => (
+              <ProductListing
+                key={index}
+                onPress={() => console.log(product)}
+                price={product.price}
+                discount={product.discount}
+                image={product.image}
+                onPressAddToCart={() => console.log("")}
+                title={product.title}
+                rating={product.rating}
+                totalFeedbacks={product.feedbacks.length}
+              />
+            ))}
+          </ScrollView>
+        </View>
+        <View style={styles.discounted}>
+          <Text style={[styles.sectionTitle, { marginBottom: 7 }]}>
+            חדש באפליקציה
+          </Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {products.map((product, index) => (
+              <ProductListing
+                key={index}
+                onPress={() => console.log(product)}
+                price={product.price}
+                discount={product.discount}
+                image={product.image}
+                onPressAddToCart={() => console.log("")}
+                title={product.title}
+                rating={product.rating}
+                totalFeedbacks={product.feedbacks.length}
+              />
+            ))}
+          </ScrollView>
+        </View>
+        <View style={styles.discounted}>
+          <Text style={[styles.sectionTitle, { marginBottom: 7 }]}>
+            ביקורות והמלצות
+          </Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {productsDiscounted.map((product, index) => (
+              <FeedbackComponent />
+            ))}
+          </ScrollView>
+        </View>
+
+        <View style={styles.listBottom}>
+          <DropDownDetails />
+          <View style={styles.space} />
+          <DropDownDetails />
+          <View style={styles.space} />
+          <DropDownDetails />
+          <View style={styles.space} />
+          <DropDownDetails />
+          <View style={styles.space} />
+          <DropDownDetails />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -182,4 +259,16 @@ const styles = StyleSheet.create({
   categoriesSection: {
     marginHorizontal: 20,
   },
+  discounted: {
+    marginHorizontal: 20,
+  },
+  listBottom: {
+    marginHorizontal: 20,
+    marginBottom: 20,
+    backgroundColor: COLORS.primary,
+    borderRadius: 5,
+    overflow: "hidden",
+    marginTop: 20,
+  },
+  space: { borderBottomWidth: 1, borderColor: COLORS.white },
 });

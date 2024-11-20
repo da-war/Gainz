@@ -18,3 +18,15 @@ declare interface AppButtonProps {
   titleColor?: string;
   btnColor?: string;
 }
+
+declare interface FeedbackComponentProps {
+  title?: string;
+  rating?: number;
+  review?: string; 
+  date?: string;
+}
+
+declare interface DropDownDetailsProps {
+  title?: string;
+  details?: string;
+}
