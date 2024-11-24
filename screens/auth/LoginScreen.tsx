@@ -17,7 +17,7 @@ import { router } from "expo-router";
 const LoginScreen = () => {
   const [isAlreadyHaveAccount, setIsAlreadyHaveAccount] =
     React.useState<boolean>(false);
-  const [phone, setPhone] = React.useState<string>("+972");
+  const [phone, setPhone] = React.useState<string>("");
 
   const inputRef = React.useRef<TextInput>(null);
 
@@ -38,19 +38,17 @@ const LoginScreen = () => {
 
         <View>
           <Text style={styles.label}>אנא הזן את מספר הטלפון שלך</Text>
-          <TextInput
-            ref={inputRef}
-            placeholder="+927 - 123 - 4567"
-            placeholderTextColor={COLORS.gray}
-            style={styles.input}
-            value={phone}
-            onChangeText={(text) => setPhone(text)}
-          />
-          {isAlreadyHaveAccount ? (
-            <Text style={styles.label2}>כבר יש לך חשבון? להתחבר</Text>
-          ) : (
-            <Text style={styles.label2}>אין לך חשבון? להירשם</Text>
-          )}
+          <View style={styles.horizontalContainer}>
+            <Text style={styles.inputText}>+972</Text>
+            <TextInput
+              ref={inputRef}
+              placeholder="12-34-4567"
+              placeholderTextColor={COLORS.gray}
+              style={styles.input}
+              value={phone}
+              onChangeText={(text) => setPhone(text)}
+            />
+          </View>
         </View>
 
         <KeyboardAvoidingView style={{ marginTop: 100 }}>
@@ -113,11 +111,21 @@ const styles = StyleSheet.create({
     color: COLORS.primary,
   },
   input: {
-    borderBottomColor: COLORS.gray,
-    borderBottomWidth: 1,
     fontFamily: FONTS.regular,
     fontSize: SIZES.h2,
     padding: 5,
     marginTop: 15,
+  },
+  inputText: {
+    fontFamily: FONTS.regular,
+    fontSize: SIZES.h2,
+    padding: 5,
+    marginTop: 15,
+  },
+  horizontalContainer: {
+    borderBottomColor: COLORS.gray,
+    borderBottomWidth: 1,
+    flexDirection: "row-reverse",
+    alignItems: "center",
   },
 });
