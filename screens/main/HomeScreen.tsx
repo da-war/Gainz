@@ -76,7 +76,7 @@ const HomeScreen = () => {
 
         <View style={styles.categoriesSection}>
           <Text style={styles.sectionTitle}>לפי קטגוריה</Text>
-          <View style={{ height: 10 }} />
+
           <ScrollView showsHorizontalScrollIndicator={false} horizontal>
             {categories.map((category, index) => (
               <DiagonalBox
@@ -90,9 +90,7 @@ const HomeScreen = () => {
         </View>
 
         <View style={styles.discounted}>
-          <Text style={[styles.sectionTitle, { marginBottom: 7 }]}>
-            מבצעים והצעות מיוחדות
-          </Text>
+          <Text style={[styles.sectionTitle]}>מבצעים והצעות מיוחדות</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {productsDiscounted.map((product, index) => (
               <ProductListing
@@ -110,9 +108,7 @@ const HomeScreen = () => {
           </ScrollView>
         </View>
         <View style={styles.discounted}>
-          <Text style={[styles.sectionTitle, { marginBottom: 7 }]}>
-            מוצרים ממולצים
-          </Text>
+          <Text style={[styles.sectionTitle]}>מוצרים ממולצים</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {productsDiscounted.map((product, index) => (
               <ProductListing
@@ -130,9 +126,7 @@ const HomeScreen = () => {
           </ScrollView>
         </View>
         <View style={styles.discounted}>
-          <Text style={[styles.sectionTitle, { marginBottom: 7 }]}>
-            חדש באפליקציה
-          </Text>
+          <Text style={[styles.sectionTitle]}>חדש באפליקציה</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {products.map((product, index) => (
               <ProductListing
@@ -150,9 +144,7 @@ const HomeScreen = () => {
           </ScrollView>
         </View>
         <View style={styles.discounted}>
-          <Text style={[styles.sectionTitle, { marginBottom: 7 }]}>
-            ביקורות והמלצות
-          </Text>
+          <Text style={[styles.sectionTitle]}>ביקורות והמלצות</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {productsDiscounted.map((product, index) => (
               <FeedbackComponent />
@@ -160,6 +152,9 @@ const HomeScreen = () => {
           </ScrollView>
         </View>
 
+        <Text style={[styles.sectionTitle, { marginHorizontal: 20 }]}>
+          שאלות נפוצות
+        </Text>
         <View style={styles.listBottom}>
           <DropDownDetails />
           <View style={styles.space} />
@@ -249,6 +244,7 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.bold,
     fontSize: SIZES.h2,
     textAlign: "left",
+    marginBottom: 16,
   },
   viewDiagnal: {
     marginHorizontal: 10,
@@ -271,7 +267,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
     borderRadius: 5,
     overflow: "hidden",
-    marginTop: 20,
   },
   space: { borderBottomWidth: 1, borderColor: COLORS.white },
 });

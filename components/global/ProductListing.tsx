@@ -23,6 +23,7 @@ interface ProductListingProps {
   onPress: () => void;
   onPressAddToCart: () => void;
   isFav?: boolean;
+  onPressFav?: () => void;
 }
 
 const ProductListing: React.FC<ProductListingProps> = ({
@@ -33,10 +34,15 @@ const ProductListing: React.FC<ProductListingProps> = ({
   rating,
   totalFeedbacks,
   afterDiscount,
-  isFav,
+  isFav = false,
   onPress,
 }) => {
   const isDiscounted = discount > 0 ? true : false;
+  const [isFavo, setIsFavo] = React.useState<null | boolean>(isFav);
+
+  const handleFav = () => {
+    setIsFavo(!isFavo);
+  };
   return (
     <Pressable style={styles.mainContainer} onPress={onPress}>
       <View style={styles.imageContainer}>
@@ -53,13 +59,13 @@ const ProductListing: React.FC<ProductListingProps> = ({
           </View>
         )}
 
-        <View style={styles.favIcon}>
+        <Pressable onPress={handleFav} style={styles.favIcon}>
           <MaterialCommunityIcons
             size={20}
             color={COLORS.primary}
-            name={isFav ? "heart-outline" : "heart"}
+            name={isFavo ? "heart" : "heart-outline"}
           />
-        </View>
+        </Pressable>
       </View>
       <View style={styles.bgMid}>
         <Text style={styles.title}>{title}</Text>
