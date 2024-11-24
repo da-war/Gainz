@@ -181,13 +181,14 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   ad: {
     backgroundColor: COLORS.gray,
-    padding: 10,
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center",
   },
   adText: {
     color: COLORS.primary,
-    textAlign: "center",
     fontFamily: FONTS.light,
-    fontSize: 20,
+    fontSize: SIZES.body1_light,
   },
 
   icon: {
@@ -213,6 +214,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.primary,
     marginHorizontal: 20,
     borderRadius: 5,
+    marginBottom: 48,
   },
   userInfoRight: {
     flexDirection: "row",
@@ -247,7 +249,6 @@ const styles = StyleSheet.create({
     fontFamily: FONTS.bold,
     fontSize: SIZES.h2,
     textAlign: "left",
-    marginTop: 10,
   },
   viewDiagnal: {
     marginHorizontal: 10,
@@ -258,9 +259,11 @@ const styles = StyleSheet.create({
   },
   categoriesSection: {
     marginHorizontal: 20,
+    marginBottom: 48,
   },
   discounted: {
     marginHorizontal: 20,
+    marginBottom: 48,
   },
   listBottom: {
     marginHorizontal: 20,
