@@ -1,3 +1,4 @@
+import { ImageSourcePropType } from "react-native";
 
 declare interface DiagonalBoxProps{
     colorTopLeft?: string;
@@ -29,4 +30,10 @@ declare interface FeedbackComponentProps {
 declare interface DropDownDetailsProps {
   title?: string;
   details?: string;
+}
+
+declare interface Slide {
+  title: string;
+  description: string;
+  image:ImageSourcePropType,
 }

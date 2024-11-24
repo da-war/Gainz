@@ -1,21 +1,7 @@
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TextStyle,
-  ViewStyle,
-} from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 import React, { useState } from "react";
 import { COLORS, FONTS, SIZES } from "@/constants/theme";
-
-interface AppButtonProps {
-  title: string;
-  onPress: () => void;
-  style?: ViewStyle;
-  titleStyle?: TextStyle;
-  titleColor?: string;
-  btnColor?: string;
-}
+import { AppButtonProps } from "@/constants/types";
 
 const AppButton: React.FC<AppButtonProps> = ({
   title,

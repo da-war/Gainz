@@ -1,107 +1,137 @@
-import { Image, Text, View, StyleSheet, I18nManager } from "react-native";
+import {
+  Image,
+  Text,
+  View,
+  StyleSheet,
+  I18nManager,
+  Dimensions,
+  Platform,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
-import Swiper from "react-native-swiper";
-import { useRef, useState } from "react";
+import {
+  SwiperFlatList,
+  SwiperFlatListProps,
+} from "react-native-swiper-flatlist";
+
+import { useLayoutEffect, useRef, useState } from "react";
 import AppButton from "@/components/global/AppButton";
 import { COLORS, FONTS, logoWidth, viewWidth } from "@/constants/theme";
-import { IMAGES } from "@/constants";
+import { IMAGES, slides } from "@/constants";
 
-const slides = [
-  {
-    title: "ברוכים הבאים לגיינז!",
-    description: "את/ה במרחק של כמה קליקים מכניסה לעולם תוספי התזונה לחדר כושר",
-    image: IMAGES.onb1,
-  },
-  {
-    title: "עיין במגוון רחב של תוספי מזון",
-    description: "חקור מבחר מגוון של תוספי חדר כושר באיכות גבוהה עם גיינז",
-    image: IMAGES.onb2,
-  },
-  {
-    title: "משלוח מהיר ואמין",
-    description:
-      "תיהנו ממשלוח מהיר ואמין עם גיינז. השירות המסור שלנו מבטיח שתוספי התזונה שלך יגיעו במהירות לדלתך",
-    image: IMAGES.onb3,
-  },
-];
+import * as Updates from "expo-updates";
+
+const { width } = Dimensions.get("window");
 
 const Welcome = () => {
-  const swiperRef = useRef<Swiper>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const onPressButton = () => {
-    if (isLastSlide) {
-      router.push("/(auth)/login");
+  const [index, setIndex] = useState(0);
+  const shouldBeRTL = true;
+  const swiperRef = useRef<SwiperFlatList>(null);
+  useLayoutEffect(() => {
+    if (shouldBeRTL !== I18nManager.isRTL && Platform.OS !== "web") {
+      I18nManager.allowRTL(shouldBeRTL);
+      I18nManager.forceRTL(shouldBeRTL);
+      console.log("shouldRTL", shouldBeRTL);
+      Updates.reloadAsync();
+    }
+  }, []);
+
+  const handlePressNext = () => {
+    const nextIndex = index + 1;
+
+    if (nextIndex < slides.length) {
+      setIndex(nextIndex); // Update state
+      swiperRef.current?.scrollToIndex({ index: nextIndex, animated: true }); // Scroll
     } else {
-      swiperRef.current?.scrollBy(1);
+      router.push("/(auth)/login");
     }
   };
 
-  console.log("rtl", I18nManager.isRTL);
-
-  const isLastSlide = activeIndex === slides.length - 1;
-
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={[styles.cContainer]}>
+    <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.container1}>
         <Image resizeMode="contain" source={IMAGES.logo} style={styles.logo} />
       </View>
-
-      <Swiper
-        ref={swiperRef}
-        loop={false}
-        dot={<View style={styles.dot} />}
-        activeDot={<View style={styles.activeDot} />}
-        onIndexChanged={(index) => setActiveIndex(index)} // Sync activeIndex
-        scrollEnabled={false} // Manual scrolling only
-      >
-        {slides.map((item, index) => (
-          <View style={[styles.cContainer, styles.slide]} key={index}>
-            <Image
-              resizeMode="contain"
-              source={item.image}
-              style={styles.image}
-            />
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.description}>{item.description}</Text>
-          </View>
-        ))}
-      </Swiper>
-
-      <View style={[styles.cContainer, styles.container3]}>
-        <AppButton title="hello" onPress={onPressButton} />
+      <View style={styles.container2}>
+        <SwiperFlatList
+          autoplay={false}
+          ref={swiperRef}
+          index={index}
+          onChangeIndex={({ index }) => setIndex(index)}
+          showPagination
+          PaginationComponent={() => (
+            <View style={styles.paginationContainer}>
+              {slides.map((_, idx) => (
+                <View
+                  key={idx}
+                  style={[
+                    styles.paginationDot,
+                    idx === index
+                      ? styles.activePaginationDot
+                      : styles.inactivePaginationDot,
+                  ]}
+                />
+              ))}
+            </View>
+          )}
+          data={slides}
+          renderItem={({ item }) => (
+            <View style={[styles.slideContainer]} key={item.title}>
+              <Image
+                resizeMode="contain"
+                source={item.image}
+                style={styles.image}
+              />
+              <Text style={styles.title}>{item.title}</Text>
+              <View style={styles.descriptionContainer}>
+                <Text style={styles.description}>{item.description}</Text>
+              </View>
+            </View>
+          )}
+        />
+      </View>
+      <View style={styles.container3}>
+        <AppButton title="המשך" onPress={handlePressNext} />
       </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+  },
+  container1: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  container2: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  container3: {
+    marginBottom: "10%",
+    marginTop: "5%",
+    marginHorizontal: "25%",
+  },
+  slideContainer: {
+    width: width,
+    justifyContent: "center",
+  },
   container: {
     flex: 1,
     alignItems: "center",
     backgroundColor: "white",
     paddingBottom: "30%",
   },
-  container3: {
-    width: viewWidth,
 
-    marginBottom: 20,
-  },
-  cContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
   logo: {
     width: logoWidth,
     height: 180,
   },
-  slide: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
-    paddingBottom: 50,
-  },
+
   image: {
     width: "100%",
     height: 200,
@@ -114,10 +144,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     color: COLORS.primary,
   },
+  descriptionContainer: {
+    alignSelf: "center",
+    width: "70%",
+    marginBottom: 45,
+  },
   description: {
     fontSize: 16,
     textAlign: "center",
-    width: "60%",
     lineHeight: 22,
     color: "#555",
   },
@@ -134,6 +168,30 @@ const styles = StyleSheet.create({
     height: 8,
     borderRadius: 4,
     marginHorizontal: 5,
+  },
+
+  paginationContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+  },
+
+  paginationDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 5,
+  },
+
+  activePaginationDot: {
+    backgroundColor: COLORS.secondary,
+    transform: [{ scale: 1.2 }], // Makes active dot slightly bigger
+  },
+
+  inactivePaginationDot: {
+    backgroundColor: COLORS.gray,
+    opacity: 0.6,
   },
 });
 

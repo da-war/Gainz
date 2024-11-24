@@ -12,6 +12,7 @@ import menu from '@/assets/icons/menu.png'
 import userImage from '@/assets/images/user.png'
 import search2 from "@/assets/icons/search2.png"
 import productOne from '@/assets/images/product.png'
+import { Slide } from "./types";
 
 export const ICONS = {
     home,
@@ -117,3 +118,23 @@ export const products = [
      discount:0,
   },
 ]
+
+
+export const slides:Slide[] = [
+  {
+    title: "ברוכים הבאים לגיינז!",
+    description: "את/ה במרחק של כמה קליקים מכניסה לעולם תוספי התזונה לחדר כושר",
+    image: IMAGES.onb1,
+  },
+  {
+    title: "עיין במגוון רחב של תוספי מזון",
+    description: "חקור מבחר מגוון של תוספי חדר כושר באיכות גבוהה עם גיינז",
+    image: IMAGES.onb2,
+  },
+  {
+    title: "משלוח מהיר ואמין",
+    description:
+      "תיהנו ממשלוח מהיר ואמין עם גיינז. השירות המסור שלנו מבטיח שתוספי התזונה שלך יגיעו במהירות לדלתך",
+    image: IMAGES.onb3,
+  },
+];

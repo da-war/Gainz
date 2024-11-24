@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
+import { I18nManager, Platform, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Slot, Stack } from "expo-router";
 
 import { useFonts } from "expo-font";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import * as Updates from "expo-updates";
 
 const RootLayout = () => {
   const [loaded] = useFonts({
@@ -19,6 +20,14 @@ const RootLayout = () => {
 
   if (!loaded) {
     return null;
+  }
+
+  const shouldBeRTL = true;
+
+  if (shouldBeRTL !== I18nManager.isRTL && Platform.OS !== "web") {
+    I18nManager.allowRTL(shouldBeRTL);
+    I18nManager.forceRTL(shouldBeRTL);
+    Updates.reloadAsync();
   }
 
   return (

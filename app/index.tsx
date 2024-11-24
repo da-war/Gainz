@@ -6,16 +6,15 @@ const Index = () => {
   const [user, setUser] = useState<null | boolean>(null); // Assume null indicates loading state
 
   useEffect(() => {
-    // Simulate user authentication check
     const timeout = setTimeout(() => {
-      setUser(false); // Set to true/false based on authentication logic
-    }, 1000); // Example delay for async check
+      setUser(false);
+    }, 1000);
 
     return () => clearTimeout(timeout);
   }, []);
 
   useEffect(() => {
-    if (user === null) return; // Avoid navigating while still loading
+    if (user === null) return;
 
     if (user) {
       router.replace("/(tabs)/home");
