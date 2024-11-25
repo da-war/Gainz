@@ -1,6 +1,5 @@
 import {
   Image,
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -54,7 +53,7 @@ const LoginScreen = () => {
         <KeyboardAvoidingView style={{ marginTop: 100 }}>
           <AppButton
             title="המשך"
-            onPress={() => router.replace("/(tabs)/home")}
+            onPress={() => router.replace("/(tabs)/(home)/home")}
             style={{ marginTop: 20, width: "65%", alignSelf: "center" }}
           />
           {isAlreadyHaveAccount ? (

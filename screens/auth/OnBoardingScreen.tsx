@@ -1,40 +1,18 @@
-import {
-  Image,
-  Text,
-  View,
-  StyleSheet,
-  I18nManager,
-  Dimensions,
-  Platform,
-} from "react-native";
+import { Image, Text, View, StyleSheet, Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
-import {
-  SwiperFlatList,
-  SwiperFlatListProps,
-} from "react-native-swiper-flatlist";
+import { SwiperFlatList } from "react-native-swiper-flatlist";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import AppButton from "@/components/global/AppButton";
-import { COLORS, FONTS, logoWidth, viewWidth } from "@/constants/theme";
+import { COLORS, FONTS, logoWidth } from "@/constants/theme";
 import { IMAGES, slides } from "@/constants";
-
-import * as Updates from "expo-updates";
 
 const { width } = Dimensions.get("window");
 
 const Welcome = () => {
   const [index, setIndex] = useState(0);
-  const shouldBeRTL = true;
   const swiperRef = useRef<SwiperFlatList>(null);
-  useLayoutEffect(() => {
-    if (shouldBeRTL !== I18nManager.isRTL && Platform.OS !== "web") {
-      I18nManager.allowRTL(shouldBeRTL);
-      I18nManager.forceRTL(shouldBeRTL);
-      console.log("shouldRTL", shouldBeRTL);
-      Updates.reloadAsync();
-    }
-  }, []);
 
   const handlePressNext = () => {
     const nextIndex = index + 1;

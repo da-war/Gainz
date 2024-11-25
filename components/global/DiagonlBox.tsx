@@ -1,4 +1,5 @@
 import { COLORS } from "@/constants/theme";
+import { DiagonalBoxProps } from "@/constants/types";
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 

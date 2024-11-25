@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 12,
     width: "100%",
+    borderRadius: 5,
   },
   title: {
     fontSize: SIZES.button,

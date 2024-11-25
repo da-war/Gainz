@@ -11,20 +11,7 @@ import { COLORS, FONTS, SIZES } from "@/constants/theme";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getDiscountedPrice } from "@/utils";
-
-interface ProductListingProps {
-  discount: number;
-  price: number;
-  title: string;
-  image: ImageSourcePropType;
-  rating?: number;
-  totalFeedbacks?: number;
-  afterDiscount?: number;
-  onPress: () => void;
-  onPressAddToCart: () => void;
-  isFav?: boolean;
-  onPressFav?: () => void;
-}
+import { ProductListingProps } from "@/constants/types";
 
 const ProductListing: React.FC<ProductListingProps> = ({
   discount,
@@ -123,6 +110,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     borderRadius: 5,
     overflow: "hidden",
+    maxWidth: 185,
+    minWidth: 150,
   },
   bgMid: {
     backgroundColor: COLORS.white,
@@ -134,7 +123,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     height: 150,
-    width: 125,
+    maxWidth: "100%",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: COLORS.grayBg,

@@ -21,6 +21,7 @@ import DiagonalBox from "@/components/global/DiagonlBox";
 import ProductListing from "@/components/global/ProductListing";
 import FeedbackComponent from "@/components/global/FeedbackComponent";
 import DropDownDetails from "@/components/global/DropDownDetails";
+import { router } from "expo-router";
 
 const HomeScreen = () => {
   const userImage = IMAGES.userImage;
@@ -95,7 +96,7 @@ const HomeScreen = () => {
             {productsDiscounted.map((product, index) => (
               <ProductListing
                 key={index}
-                onPress={() => console.log(product)}
+                onPress={() => router.push("/(tabs)/(home)/productDetails")}
                 price={product.price}
                 discount={product.discount}
                 image={product.image}

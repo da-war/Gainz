@@ -37,3 +37,17 @@ declare interface Slide {
   description: string;
   image:ImageSourcePropType,
 }
+
+declare interface ProductListingProps {
+  discount: number;
+  price: number;
+  title: string;
+  image: ImageSourcePropType;
+  rating?: number;
+  totalFeedbacks?: number;
+  afterDiscount?: number;
+  onPress: () => void;
+  onPressAddToCart: () => void;
+  isFav?: boolean;
+  onPressFav?: () => void;
+}

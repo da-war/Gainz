@@ -1,10 +1,9 @@
-import { I18nManager, Platform, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Slot, Stack } from "expo-router";
 
 import { useFonts } from "expo-font";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import * as Updates from "expo-updates";
+import { Platform, I18nManager } from "react-native";
 
 const RootLayout = () => {
   const [loaded] = useFonts({
@@ -22,13 +21,7 @@ const RootLayout = () => {
     return null;
   }
 
-  const shouldBeRTL = true;
-
-  if (shouldBeRTL !== I18nManager.isRTL && Platform.OS !== "web") {
-    I18nManager.allowRTL(shouldBeRTL);
-    I18nManager.forceRTL(shouldBeRTL);
-    Updates.reloadAsync();
-  }
+  console.log("dsfahjkhkjhdksjf", I18nManager.isRTL);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
