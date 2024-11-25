@@ -33,7 +33,13 @@ const DropDownDetails: React.FC<DropDownDetailsProps> = ({
 
   return (
     <View>
-      <Pressable onPress={toggleDropdown} style={styles.topContainer}>
+      <Pressable
+        onPress={toggleDropdown}
+        style={[
+          styles.topContainer,
+          { backgroundColor: isOpen ? COLORS.secondary : COLORS.primary },
+        ]}
+      >
         <Text style={styles.title}>{title}</Text>
         <Animated.View style={{ transform: [{ rotate: rotateIcon }] }}>
           <Ionicons name="arrow-up-circle" size={20} color="white" />
@@ -59,7 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: COLORS.primary,
-    padding: 10,
+    padding: 6,
   },
   title: {
     color: COLORS.white,

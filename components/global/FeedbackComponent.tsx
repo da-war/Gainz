@@ -4,6 +4,7 @@ import { IMAGES } from "@/constants";
 import { COLORS, FONTS, SIZES } from "@/constants/theme";
 
 import { StarRatingDisplay } from "react-native-star-rating-widget";
+import { FeedbackComponentProps } from "@/constants/types";
 
 const FeedbackComponent: React.FC<FeedbackComponentProps> = ({
   title = "יונתן מארי",

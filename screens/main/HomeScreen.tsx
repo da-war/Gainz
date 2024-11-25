@@ -16,7 +16,6 @@ import {
   products,
   productsDiscounted,
 } from "@/constants";
-import DiagonalSplitView from "@/components/global/DiagonlBox";
 import DiagonalBox from "@/components/global/DiagonlBox";
 import ProductListing from "@/components/global/ProductListing";
 import FeedbackComponent from "@/components/global/FeedbackComponent";

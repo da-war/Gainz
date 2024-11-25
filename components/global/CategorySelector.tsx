@@ -8,13 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 import { COLORS, FONTS, SIZES } from "@/constants/theme";
-
-interface CategorySelectorProps {
-  title: string;
-  categories: string[];
-  selectedCategory: string;
-  onSelectCategory: (category: string) => void;
-}
+import { CategorySelectorProps } from "@/constants/types";
 
 const CategorySelector: React.FC<CategorySelectorProps> = ({
   title = "Title",

@@ -7,15 +7,21 @@ import {
   StyleSheet,
   View,
   Text,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
 import { COLORS, FONTS, SIZES } from "@/constants/theme";
 
+import { StarRatingDisplay } from "react-native-star-rating-widget";
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { getDiscountedPrice } from "@/utils";
 import CategorySelector from "@/components/global/CategorySelector";
+import AppButton from "@/components/global/AppButton";
+import DropDownDetails from "@/components/global/DropDownDetails";
+import { IMAGES } from "@/constants";
 
 const { width } = Dimensions.get("window");
 
@@ -24,6 +30,39 @@ const productsImages = [
   { id: 2, image: require("@/assets/images/protein.png") },
   { id: 3, image: require("@/assets/images/protein.png") },
   { id: 4, image: require("@/assets/images/protein.png") },
+];
+
+const imageforAll = IMAGES.userImage;
+
+const feedbacks = [
+  //id,name,rating,feedback,date,imageforAll
+  {
+    id: 1,
+    name: "יונתן מארי",
+    rating: 4.5,
+    feedback:
+      "אפליקציה מעולה! עוזרת לי לעקוב אחרי צריכת החלבון בצורה פשוטה ונוחה. מאוד ממליץ לכל מי שמתאמן.",
+    date: "2021-10-10",
+    imageforAll: imageforAll,
+  },
+  {
+    id: 2,
+    name: "יונתן מארי",
+    rating: 4.5,
+    feedback:
+      "אפליקציה מעולה! עוזרת לי לעקוב אחרי צריכת החלבון בצורה פשוטה ונוחה. מאוד ממליץ לכל מי שמתאמן.",
+    date: "2021-10-10",
+    imageforAll: imageforAll,
+  },
+  {
+    id: 3,
+    name: "יונתן מארי",
+    rating: 4.5,
+    feedback:
+      "אפליקציה מעולה! עוזרת לי לעקוב אחרי צריכת החלבון בצורה פשוטה ונוחה. מאוד ממליץ לכל מי שמתאמן.",
+    date: "2021-10-10",
+    imageforAll: imageforAll,
+  },
 ];
 
 const product = {
@@ -35,11 +74,13 @@ const product = {
   totalFeedbacks: 100,
   tastes: ["בננה", " תות", "וניל", "עוגיות"],
   weights: ["1KG", "2KG", "3KG"],
+  feedbacks: feedbacks,
 };
 
 const ProductScreen = () => {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [isFav, setIsFav] = React.useState(true);
+  const [quantity, setQuantity] = React.useState(1);
   const [currentTaste, setCurrentTaste] = React.useState<string>(
     product.tastes[0]
   );
@@ -56,6 +97,19 @@ const ProductScreen = () => {
 
   const handleIndexChange = ({ index }: { index: number }) => {
     setCurrentIndex(index);
+  };
+
+  const decreaseQuantity = () => {
+    //make sure quantity can't be less than 1
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    } else {
+      Alert.alert("הכמות לא יכולה להיות פחות מ-1");
+    }
+  };
+
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
   };
 
   return (
@@ -167,6 +221,112 @@ const ProductScreen = () => {
             onSelectCategory={(weight) => setCurrentWeight(weight)}
           />
         </View>
+
+        <View style={styles.callToActionContainer}>
+          <View>
+            <Text style={styles.titleRating}>כמות:</Text>
+            <View style={styles.quantityCal}>
+              <Pressable style={styles.quantityFunc} onPress={decreaseQuantity}>
+                <MaterialCommunityIcons
+                  name="minus"
+                  size={18}
+                  color={COLORS.white}
+                />
+              </Pressable>
+              <Text style={styles.quantityText}>{quantity}</Text>
+              <Pressable
+                style={styles.quantityFunc}
+                onPress={incrementQuantity}
+              >
+                <MaterialCommunityIcons
+                  name="plus"
+                  size={18}
+                  color={COLORS.white}
+                />
+              </Pressable>
+            </View>
+          </View>
+          <AppButton
+            title="הוספה לסל"
+            onPress={() => console.log("Add To Cart")}
+          />
+          <Text style={styles.callToActionText}>משלוח חינם מעל 500 ₪</Text>
+          <View style={styles.spacer} />
+          <View>
+            <Text style={styles.termsTitle}>משלוח והחזרות</Text>
+            <Text style={styles.delivery}>זמן אספקה: 2-5 ימים</Text>
+            <Text style={styles.delivery}>זמן אספקה VIP: יום אחד</Text>
+
+            <Text style={styles.returnTitle}>
+              אם אני לא לגמרי מרוצה מהרכישות שלי
+            </Text>
+            <Text style={styles.returnText}>
+              אנא עיין{" "}
+              <Text style={styles.returnColored}> במדיניות ההחזרות </Text>שלנו
+            </Text>
+          </View>
+
+          <View style={styles.spacer} />
+
+          <View style={styles.listBottom}>
+            <DropDownDetails />
+            <View style={styles.space} />
+            <DropDownDetails />
+            <View style={styles.space} />
+            <DropDownDetails />
+            <View style={styles.space} />
+            <DropDownDetails />
+            <View style={styles.space} />
+            <DropDownDetails />
+          </View>
+        </View>
+
+        <View style={[styles.spacer, { marginTop: 0 }]} />
+        <View style={styles.rateContainer}>
+          <Text style={styles.titleRating}>דירוגי לקוחות</Text>
+          <View style={styles.mainRateContainer}>
+            <Text style={styles.titlish}>{product.rating}</Text>
+            <View>
+              <View>
+                <StarRatingDisplay
+                  color={COLORS.secondary}
+                  rating={product.rating}
+                />
+              </View>
+              <Text>מבוסס על פידבקים מ-12,000 לקוחות</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.spacer} />
+
+        <View style={styles.feedbackContainer}>
+          <Text style={styles.titleRating}>ביקורות הלקוחות</Text>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {feedbacks.map((feedback, index) => (
+              <View key={index}>
+                <View style={styles.feedbackTopContainer}>
+                  <View>
+                    <Image
+                      resizeMode="cover"
+                      source={feedback.imageforAll}
+                      style={styles.feedbackImage}
+                    />
+                  </View>
+                  <View style={styles.leftContainerFeedback}>
+                    <Text style={styles.feedbackTitle}>{feedback.name}</Text>
+                    <StarRatingDisplay
+                      rating={feedback.rating}
+                      starSize={15}
+                      color={COLORS.secondary}
+                    />
+                  </View>
+                </View>
+                <Text style={styles.review}>{feedback.feedback}</Text>
+                <Text style={styles.date}>{feedback.date}</Text>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -175,6 +335,120 @@ const ProductScreen = () => {
 export default ProductScreen;
 
 const styles = StyleSheet.create({
+  quantityFunc: {
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+    backgroundColor: COLORS.primary,
+  },
+
+  quantityText: {},
+  quantityCal: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    borderWidth: 1,
+    maxWidth: 90,
+    justifyContent: "space-between",
+    borderRadius: 5,
+    marginBottom: 18,
+  },
+  review: {
+    textAlign: "left",
+    marginBottom: 8,
+    fontFamily: FONTS.regular,
+    fontSize: SIZES.body3,
+  },
+  date: {
+    color: COLORS.primary,
+    fontSize: SIZES.body3_light,
+    fontFamily: FONTS.light,
+  },
+  feedbackContainer: {
+    marginHorizontal: 20,
+  },
+  titlish: {
+    fontFamily: FONTS.bold,
+    fontSize: SIZES.h1,
+  },
+  mainRateContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+  },
+  leftContainerFeedback: {
+    marginLeft: 15,
+  },
+  rateContainer: {
+    marginHorizontal: 20,
+  },
+  titleRating: {
+    fontFamily: FONTS.bold,
+    fontSize: SIZES.h3,
+    color: COLORS.primary,
+    textAlign: "left",
+    marginBottom: 8,
+  },
+
+  listBottom: {
+    marginBottom: 20,
+    backgroundColor: COLORS.primary,
+    borderRadius: 5,
+    overflow: "hidden",
+  },
+  space: { borderBottomWidth: 1, borderColor: COLORS.white },
+
+  returnTitle: {
+    fontFamily: FONTS.bold,
+    fontSize: SIZES.h3,
+    color: COLORS.primary,
+    textAlign: "left",
+    marginTop: 10,
+  },
+  returnText: {
+    fontFamily: FONTS.light,
+    fontSize: SIZES.body2_light,
+    textAlign: "left",
+    color: COLORS.primary,
+  },
+  returnColored: {
+    color: COLORS.secondary,
+    fontFamily: FONTS.bold,
+    fontSize: SIZES.h3,
+  },
+
+  termsTitle: {
+    fontFamily: FONTS.bold,
+    fontSize: SIZES.h3,
+    color: COLORS.primary,
+    textAlign: "left",
+  },
+  delivery: {
+    fontFamily: FONTS.light,
+    fontSize: SIZES.body2_light,
+    textAlign: "left",
+    color: COLORS.primary,
+  },
+
+  callToActionContainer: {
+    marginHorizontal: 20,
+    marginTop: 20,
+  },
+  callToActionText: {
+    fontFamily: FONTS.light,
+    fontSize: SIZES.body1_light,
+    color: COLORS.primary,
+    textAlign: "center",
+    marginTop: 8,
+  },
+  spacer: {
+    marginVertical: 16,
+    borderBottomColor: COLORS.themeGray,
+    borderColor: COLORS.primary,
+    borderBottomWidth: 0.5,
+    marginHorizontal: 20,
+  },
   absoluteOne: {
     position: "absolute",
     top: 20,
@@ -289,5 +563,21 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
     borderBottomWidth: 0.5,
     borderBottomColor: COLORS.themeGray,
+  },
+  feedbackTopContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 8,
+  },
+  feedbackImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 5,
+  },
+  feedbackTitle: {
+    fontFamily: FONTS.bold,
+    fontSize: SIZES.h3,
+    color: COLORS.primary,
+    textAlign: "left",
   },
 });
