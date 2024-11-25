@@ -99,7 +99,7 @@ const HomeScreen = () => {
                 price={product.price}
                 discount={product.discount}
                 image={product.image}
-                onPressAddToCart={() => console.log("")}
+                onPressAddToCart={() => console.log(product)}
                 title={product.title}
                 rating={product.rating}
                 totalFeedbacks={product.feedbacks.length}

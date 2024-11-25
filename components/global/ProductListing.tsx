@@ -7,22 +7,24 @@ import {
   View,
 } from "react-native";
 import React from "react";
-import { COLORS, FONTS, SIZES } from "@/constants/theme";
+import { COLORS, FONTS, SIZES, width } from "@/constants/theme";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getDiscountedPrice } from "@/utils";
 import { ProductListingProps } from "@/constants/types";
+import { IMAGES } from "@/constants";
 
 const ProductListing: React.FC<ProductListingProps> = ({
-  discount,
-  price,
-  title,
-  image,
-  rating,
-  totalFeedbacks,
-  afterDiscount,
+  discount = 0,
+  price = 110,
+  title = "אבקת חלבון ווי גורילה מוד | מוח הגורילה",
+  image = IMAGES.productOne,
+  rating = 4.5,
+  totalFeedbacks = 100,
+  afterDiscount = 100,
   isFav = false,
-  onPress,
+  onPress = () => {},
+  style,
 }) => {
   const isDiscounted = discount > 0 ? true : false;
   const [isFavo, setIsFavo] = React.useState<null | boolean>(isFav);
@@ -31,7 +33,7 @@ const ProductListing: React.FC<ProductListingProps> = ({
     setIsFavo(!isFavo);
   };
   return (
-    <Pressable style={styles.mainContainer} onPress={onPress}>
+    <Pressable style={[styles.mainContainer, style]} onPress={onPress}>
       <View style={styles.imageContainer}>
         <Image resizeMode="contain" source={image} style={styles.image} />
         {discount > 0 && (
@@ -110,8 +112,8 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     borderRadius: 5,
     overflow: "hidden",
-    maxWidth: 185,
-    minWidth: 150,
+    maxWidth: 186,
+    minWidth: width / 2.5,
   },
   bgMid: {
     backgroundColor: COLORS.white,

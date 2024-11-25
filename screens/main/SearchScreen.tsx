@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { categories, ICONS } from "@/constants";
 import { COLORS, FONTS } from "@/constants/theme";
+import { router } from "expo-router";
 
 const SearchScreen = () => {
   const [searchText, setSearchText] = useState<string>("");
@@ -35,15 +36,10 @@ const SearchScreen = () => {
           data={categories}
           numColumns={2} // Two columns
           keyExtractor={(item) => item.id.toString()}
-          columnWrapperStyle={styles.columnWrapper} // Adds space between columns
+          columnWrapperStyle={styles.columnWrapper}
           renderItem={({ item }) => (
             <TouchableOpacity
-              onPress={() =>
-                console.log({
-                  id: item.id,
-                  name: item.title,
-                })
-              }
+              onPress={() => router.push("/(tabs)/(search)/category")}
               style={styles.itemContainer}
             >
               <Image

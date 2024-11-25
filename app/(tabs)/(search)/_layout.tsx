@@ -7,6 +7,7 @@ const SearchStack = () => {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="search" />
       <Stack.Screen name="productDetails" />
+      <Stack.Screen name="category" />
     </Stack>
   );
 };
