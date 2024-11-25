@@ -13,7 +13,7 @@ const AppTabLayout = () => {
       }}
     >
       <Tabs.Screen
-        name="home"
+        name="(home)"
         options={{
           tabBarIcon: ({ focused }) => (
             <Image
@@ -29,11 +29,69 @@ const AppTabLayout = () => {
               resizeMode="contain"
             />
           ),
+          title: "Home",
         }}
       />
-      <Tabs.Screen name="search" />
-      <Tabs.Screen name="cart" />
-      <Tabs.Screen name="profile" />
+      <Tabs.Screen
+        name="(search)"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={
+                focused
+                  ? require("@/assets/icons/tabs/searchc.png")
+                  : require("@/assets/icons/tabs/search.png")
+              }
+              style={{
+                width: 20,
+                height: 20,
+              }}
+              resizeMode="contain"
+            />
+          ),
+          title: "Search",
+        }}
+      />
+      <Tabs.Screen
+        name="(cart)"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={
+                focused
+                  ? require("@/assets/icons/tabs/cartc.png")
+                  : require("@/assets/icons/tabs/cart.png")
+              }
+              style={{
+                width: 20,
+                height: 20,
+              }}
+              resizeMode="contain"
+            />
+          ),
+          title: "Cart",
+        }}
+      />
+      <Tabs.Screen
+        name="(profile)"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <Image
+              source={
+                focused
+                  ? require("@/assets/icons/tabs/profilec.png")
+                  : require("@/assets/icons/tabs/profile.png")
+              }
+              style={{
+                width: 20,
+                height: 20,
+              }}
+              resizeMode="contain"
+            />
+          ),
+          title: "Profile",
+        }}
+      />
     </Tabs>
   );
 };
