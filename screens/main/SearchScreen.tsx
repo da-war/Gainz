@@ -1,6 +1,7 @@
 import {
   FlatList,
   Image,
+  Platform,
   StyleSheet,
   Text,
   TextInput,
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     backgroundColor: COLORS.grayBg,
     borderRadius: 5,
+    marginTop: 10,
   },
   image: {
     width: 22,
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
   itemImage: {
     width: "100%",
     height: 50,
-    borderRadius: "5%",
+    borderRadius: 5,
   },
   titleContainer: {
     position: "absolute",
