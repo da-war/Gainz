@@ -1,4 +1,11 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React from "react";
 import { COLORS, FONTS, SIZES } from "@/constants/theme";
 
@@ -64,7 +71,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 80,
     borderRadius: 5,
-    borderWidth: 0.5,
+    borderWidth: Platform.OS === "android" ? 1 : 0.5,
     borderColor: COLORS.gray,
     marginRight: 8,
   },
