@@ -9,6 +9,7 @@ export const COLORS = {
     gray: "rgba(16, 24, 33, 0.25)",
     grayBg: "#E7E8E9",
     black: "#000000",
+    themeGray:"rgba(17, 24, 33, 0.11)",
 }
 
 export const SIZES = {

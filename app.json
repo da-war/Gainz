@@ -22,7 +22,8 @@
       "supportsTablet": true,
       "infoPlist": {
         "ExpoLocalization_supportsRTL": true,
-        "ExpoLocalization_forcesRTL": true
+        "ExpoLocalization_forcesRTL": true,
+        "UISemanticContentAttribute": "ForceRightToLeft"
       },
       "bundleIdentifier": "com.ranadawar.Gainz"
     },
@@ -31,7 +32,10 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ranadawar.Gainz"
+      "package": "com.ranadawar.Gainz",
+      "config": {
+        "supportsRTL": true
+      }
     },
     "web": {
       "bundler": "metro",
