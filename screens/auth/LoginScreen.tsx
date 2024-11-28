@@ -56,21 +56,6 @@ const LoginScreen = () => {
             onPress={() => router.replace("/(tabs)/(home)/home")}
             style={{ marginTop: 20, width: "65%", alignSelf: "center" }}
           />
-          {isAlreadyHaveAccount ? (
-            <Text
-              onPress={() => setIsAlreadyHaveAccount(!isAlreadyHaveAccount)}
-              style={styles.label2}
-            >
-              עבור לעכשיו
-            </Text>
-          ) : (
-            <Text
-              onPress={() => setIsAlreadyHaveAccount(!isAlreadyHaveAccount)}
-              style={styles.label2}
-            >
-              עבור להרשמה
-            </Text>
-          )}
         </KeyboardAvoidingView>
       </ScrollView>
     </KeyboardAvoidingView>

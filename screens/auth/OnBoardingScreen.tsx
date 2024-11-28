@@ -1,4 +1,4 @@
-import { Image, Text, View, StyleSheet, Dimensions } from "react-native";
+import { Image, Text, View, StyleSheet, Dimensions, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { router } from "expo-router";
 import { SwiperFlatList } from "react-native-swiper-flatlist";
@@ -13,6 +13,8 @@ const { width } = Dimensions.get("window");
 const Welcome = () => {
   const [index, setIndex] = useState(0);
   const swiperRef = useRef<SwiperFlatList>(null);
+
+
 
   const handlePressNext = () => {
     const nextIndex = index + 1;

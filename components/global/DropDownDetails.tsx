@@ -1,4 +1,12 @@
-import { Pressable, StyleSheet, Text, View, Animated } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Animated,
+  LayoutAnimation,
+  Easing,
+} from "react-native";
 import React, { useRef } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { COLORS, FONTS } from "@/constants/theme";
@@ -10,25 +18,46 @@ const DropDownDetails: React.FC<DropDownDetailsProps> = ({
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  // Animated value for rotation
+  // Animated values for rotation and height
   const rotation = useRef(new Animated.Value(0)).current;
+  const heightAnim = useRef(new Animated.Value(0)).current;
 
   const toggleDropdown = () => {
-    // Toggle the state
-    setIsOpen((prev) => !prev);
+    const nextState = !isOpen;
+    setIsOpen(nextState);
 
     // Animate rotation
     Animated.timing(rotation, {
-      toValue: isOpen ? 0 : 1,
+      toValue: nextState ? 1 : 0,
       duration: 300,
       useNativeDriver: true,
+    }).start();
+
+    // Animate height
+    Animated.timing(heightAnim, {
+      toValue: nextState ? 1 : 0,
+      duration: 300,
+      easing: Easing.out(Easing.ease),
+      useNativeDriver: false,
     }).start();
   };
 
   // Interpolating rotation value to degrees
   const rotateIcon = rotation.interpolate({
     inputRange: [0, 1],
-    outputRange: ["0deg", "180deg"], // 0 to 180 degrees rotation
+    outputRange: ["0deg", "180deg"], // Rotate from 0 to 180 degrees
+  });
+
+  // Interpolating height for the details box
+  const heightInterpolation = heightAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 100], // Adjust 100 to the maximum content height
+  });
+
+  // Opacity animation
+  const opacityInterpolation = heightAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
   });
 
   return (
@@ -45,14 +74,20 @@ const DropDownDetails: React.FC<DropDownDetailsProps> = ({
           <Ionicons name="arrow-up-circle" size={20} color="white" />
         </Animated.View>
       </Pressable>
-      {isOpen && (
-        <View style={styles.detailsBox}>
-          <Text>
-            אפליקציה מעולה! עוזרת לי לעקוב אחרי צריכת החלבון בצורה פשוטה ונוחה.
-            מאוד ממליץ לכל מי שמתאמן.
-          </Text>
-        </View>
-      )}
+      <Animated.View
+        style={[
+          styles.detailsBox,
+          {
+            height: heightInterpolation,
+            opacity: opacityInterpolation,
+          },
+        ]}
+      >
+        <Text style={styles.detailsText}>
+          אפליקציה מעולה! עוזרת לי לעקוב אחרי צריכת החלבון בצורה פשוטה ונוחה.
+          מאוד ממליץ לכל מי שמתאמן.
+        </Text>
+      </Animated.View>
     </View>
   );
 };
@@ -64,16 +99,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: COLORS.primary,
-    padding: 6,
+    padding: 10,
+    borderRadius: 5,
   },
   title: {
     color: COLORS.white,
     fontFamily: FONTS.bold,
-    fontSize: 22,
+    fontSize: 18,
   },
   detailsBox: {
+    overflow: "hidden", // Ensures smooth height animation
     backgroundColor: COLORS.white,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.gray,
+  },
+  detailsText: {
     padding: 10,
+    color: COLORS.primary,
+    fontFamily: FONTS.regular,
+    textAlign: "left",
   },
 });

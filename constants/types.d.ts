@@ -1,4 +1,4 @@
-import { ImageSourcePropType } from "react-native";
+import { ImageSourcePropType, ViewStyle } from "react-native";
 
 declare interface DiagonalBoxProps{
     colorTopLeft?: string;
@@ -50,4 +50,12 @@ declare interface ProductListingProps {
   onPressAddToCart: () => void;
   isFav?: boolean;
   onPressFav?: () => void;
+  style?: ViewStyle;
+}
+
+declare interface CategorySelectorProps {
+  title: string;
+  categories: string[];
+  selectedCategory: string;
+  onSelectCategory: (category: string) => void;
 }

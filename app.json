@@ -46,6 +46,12 @@
       "expo-localization",
       "expo-router",
       [
+        "expo-dev-launcher",
+        {
+          "launchMode": "most-recent"
+        }
+      ],
+      [
         "expo-splash-screen",
         {
           "image": "./assets/images/splash.png",

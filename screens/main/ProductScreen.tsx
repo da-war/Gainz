@@ -318,6 +318,7 @@ const ProductScreen = () => {
                       rating={feedback.rating}
                       starSize={15}
                       color={COLORS.secondary}
+                      style={{ marginLeft: -7 }}
                     />
                   </View>
                 </View>
@@ -379,6 +380,7 @@ const styles = StyleSheet.create({
   },
   leftContainerFeedback: {
     marginLeft: 15,
+    alignItems: "flex-start",
   },
   rateContainer: {
     marginHorizontal: 20,

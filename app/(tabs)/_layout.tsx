@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image } from "react-native";
 import React from "react";
 import { Tabs } from "expo-router";
 import { COLORS } from "@/constants/theme";
@@ -98,4 +98,3 @@ const AppTabLayout = () => {
 
 export default AppTabLayout;
 
-const styles = StyleSheet.create({});
