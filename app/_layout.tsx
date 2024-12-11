@@ -3,7 +3,7 @@ import { Slot, Stack } from "expo-router";
 
 import { useFonts } from "expo-font";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { Platform, I18nManager } from "react-native";
+import { I18nManager } from "react-native";
 
 const RootLayout = () => {
   const [loaded] = useFonts({
